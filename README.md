@@ -3,12 +3,18 @@
 
 ```
 Doc      ← Block*
-Block    ← NewLine / HeadLine / ParaLine
-HeadLine ← '#'+ Spaces ParaLine
+Block    ← NewLine / HeadLine / ParaLine / ImageLine
+
+NewLine  ← '\n'
+
+HeadLine ← '#'+ Spaces Inline NewLine
 ParaLine ← Inline NewLine
 Inline   ← \n以外のすべての文字*
-NewLine  ← '\n'
 Spaces   ← ' '+
+
+ImageLine← '![' ImageAlt '](' ImagePath ')' ' '* NewLine
+ImageAlt ← Inline
+ImagePath← Inline
 ```
 
 more details http://qiita.com/mindboard/items/660f621123cfaa001cf1

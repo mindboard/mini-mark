@@ -16,7 +16,7 @@ class MiniMarkParser extends BaseParser<Object> {
     }
 
     Rule HeadLine(){
-        Sequence( OneOrMore('#'), Spaces(), ParaLine() )
+        Sequence( OneOrMore('#'), Spaces(), Inline(), NewLine() )
     }
 
     Rule ParaLine(){
