@@ -5,7 +5,7 @@
 Doc              ← Block*
 Block            ← NewLine / HeadLine / ParaLine / ImageLine
 
-HeadLine         ← HeadMark Spaces Inline NewLine
+HeadLine         ← HeadMark OneOrMoreSpaces Inline NewLine
 HeadMark         ← '#'+
 ParaLine         ← Inline NewLine
 Inline           ← '\n'以外のすべての文字*
