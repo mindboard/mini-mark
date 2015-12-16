@@ -12,11 +12,15 @@ class MiniMarkParser extends BaseParser<Object> {
     }
 
     Rule Block(){
-        FirstOf( NewLine(), HeadLine(), ParaLine() )
+        FirstOf( NewLine(), HeadLine(), ImageLine(), ParaLine() )
     }
 
     Rule HeadLine(){
-        Sequence( OneOrMore('#'), Spaces(), Inline(), NewLine() )
+        Sequence( HeadMark(), OneOrMoreSpaces(), Inline(), NewLine() )
+    }
+
+    Rule HeadMark(){
+        OneOrMore('#')
     }
 
     Rule ParaLine(){
@@ -31,7 +35,26 @@ class MiniMarkParser extends BaseParser<Object> {
         String('\n')
     }
 
-    Rule Spaces(){
+    Rule OneOrMoreSpaces(){
         OneOrMore(' ')
+    }
+
+    Rule ImageLine(){
+        Sequence(
+            ZeroOrMoreSpaces(),
+            String('!['), ImageAlt(), String(']('), ImagePath(), String(')'),
+            ZeroOrMoreSpaces(), NewLine() )
+    }
+
+    Rule ImageAlt(){
+        ZeroOrMore(NoneOf('\n]'))
+    }
+
+    Rule ImagePath(){
+        ZeroOrMore(NoneOf('\n)'))
+    }
+
+    Rule ZeroOrMoreSpaces(){
+        ZeroOrMore(' ')
     }
 }

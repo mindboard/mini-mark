@@ -2,19 +2,21 @@
 # mini-mark parser with parboiled
 
 ```
-Doc      ← Block*
-Block    ← NewLine / HeadLine / ParaLine / ImageLine
+Doc              ← Block*
+Block            ← NewLine / HeadLine / ParaLine / ImageLine
 
-NewLine  ← '\n'
+HeadLine         ← HeadMark Spaces Inline NewLine
+HeadMark         ← '#'+
+ParaLine         ← Inline NewLine
+Inline           ← '\n'以外のすべての文字*
+OneOrMoreSpaces  ← ' '+
 
-HeadLine ← '#'+ Spaces Inline NewLine
-ParaLine ← Inline NewLine
-Inline   ← \n以外のすべての文字*
-Spaces   ← ' '+
+ImageLine        ← ZeroOrMoreSpaces '![' ImageAlt '](' ImagePath ')' ZeroOrMoreSpaces NewLine
+ImageAlt         ← '\n'と']'以外のすべての文字*
+ImagePath        ← '\n'と')'以外のすべての文字*
+ZeroOrMoreSpaces ← ' '+
 
-ImageLine← '![' ImageAlt '](' ImagePath ')' ' '* NewLine
-ImageAlt ← Inline
-ImagePath← Inline
+NewLine          ← '\n'
 ```
 
 more details http://qiita.com/mindboard/items/660f621123cfaa001cf1

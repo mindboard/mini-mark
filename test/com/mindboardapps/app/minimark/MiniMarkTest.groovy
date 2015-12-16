@@ -25,6 +25,9 @@ class MiniMarkTest extends Specification {
             |
             |This is another paragraph.
             |
+            |### h3 header
+            |
+            |![tree](tree.png)
             |'''.stripMargin('|')
 
         ParsingResult<Object> result = new ReportingParseRunner(parser.Doc()).run(input);
